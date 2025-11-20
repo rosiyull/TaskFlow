@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0ea5a4" />
+  <title>TaskFlow – Smart Daily Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: { 
+              DEFAULT: '#0ea5a4',
+              50: '#e6f7f7',
+              100: '#b3e9e8',
+              500: '#0ea5a4',
+              600: '#0c8a89',
+              700: '#096f6e'
+            },
+            secondary: '#6366f1',
+            accent: '#8b5cf6',
+            success: '#10b981',
+            warning: '#f59e0b',
+            danger: '#ef4444'
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.3s ease-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+            'scale-in': 'scaleIn 0.2s ease-out',
+            'bounce-subtle': 'bounceSubtle 0.6s ease-out',
+            'pulse-soft': 'pulseSoft 2s ease-in-out infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body class="dark:bg-gray-900">
+  <div class="min-h-screen p-4 md:p-6 pb-24 md:pb-6">
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto mb-6">
+      <div class="glass rounded-3xl p-6 glass-hover">
+        <!-- Top Bar -->
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-primary via-secondary to-accent rounded-2xl flex items-center justify-center shadow-lg">
+              <i class="fas fa-check-double text-white text-2xl"></i>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                TaskFlow
+              </h1>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Your Smart Daily Companion</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button 
+              id="themeToggle"
+              class="w-12 h-12 glass rounded-xl flex items-center justify-center hover:scale-110 transition-all focus-visible"
+              aria-label="Toggle theme">
+              <i class="fas fa-moon dark:fa-sun text-gray-700 dark:text-gray-300 text-lg"></i>
+            </button>
+            <button 
+              id="achievementsBtn"
+              class="relative w-12 h-12 glass rounded-xl flex items-center justify-center hover:scale-110 transition-all focus-visible"
+              aria-label="View achievements">
+              <i class="fas fa-trophy text-yellow-500 text-lg"></i>
+              <span id="achievementBadge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center hidden font-semibold">0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Progress Circle -->
+          <div class="stat-card glass rounded-2xl p-4 text-center col-span-2 md:col-span-1">
+            <div class="relative inline-block">
+              <svg class="progress-ring w-20 h-20" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(14, 165, 164, 0.1)" stroke-width="8" />
+                <circle id="progressCircle" class="progress-ring-circle" cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="8" stroke-linecap="round" />
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#0ea5a4" />
+                    <stop offset="100%" stop-color="#6366f1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span id="progressPercent" class="text-2xl font-bold text-primary" aria-live="polite">0%</span>
+              </div>
+            </div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 mt-2 font-medium">Progress Hari Ini</div>
+          </div>
+
+          <!-- Completed -->
+          <div class="stat-card glass rounded-2xl p-4 text-center">
+            <div class="text-4xl font-bold text-success mb-1" id="completedCount" aria-live="polite">0</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Selesai</div>
+          </div>
+
+          <!-- Pending -->
+          <div class="stat-card glass rounded-2xl p-4 text-center">
+            <div class="text-4xl font-bold text-warning mb-1" id="pendingCount" aria-live="polite">0</div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Pending</div>
+          </div>
+
+          <!-- Streak -->
+          <div class="stat-card glass rounded-2xl p-4 text-center">
+            <div class="flex items-center justify-center gap-2 mb-1">
+              <i class="fas fa-fire text-orange-500 text-2xl"></i>
+              <span id="streakCount" class="text-4xl font-bold text-orange-500" aria-live="polite">0</span>
+            </div>
+            <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Hari Streak</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Task Form -->
+      <div class="lg:col-span-1">
+        <div class="glass rounded-3xl p-6 glass-hover sticky top-4">
+          <h2 class="text-xl font-bold mb-5 flex items-center gap-2 text-gray-900 dark:text-white">
+            <i class="fas fa-plus-circle text-primary"></i>
+            Tambah Tugas Baru
+          </h2>
+
+          <form id="taskForm" class="space-y-5">
+            <!-- Task Name -->
+            <div>
+              <label for="taskName" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                Nama Kegiatan
+              </label>
+              <input 
+                id="taskName" 
+                type="text" 
+                required 
+                placeholder="Apa yang ingin dikerjakan?"
+                class="w-full px-4 py-3 glass rounded-xl focus:outline-none input-field text-gray-900 dark:text-white placeholder-gray-500"
+                aria-label="Nama kegiatan" />
+            </div>
+
+            <!-- Time -->
+            <div>
+              <label for="taskTime" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                Waktu
+              </label>
+              <input 
+                id="taskTime" 
+                type="time"
+                class="w-full px-4 py-3 glass rounded-xl focus:outline-none input-field text-gray-900 dark:text-white"
+                aria-label="Waktu tugas" />
+            </div>
+
+            <!-- Priority -->
+            <div>
+              <label class="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">
+                Prioritas
+              </label>
+              <div class="grid grid-cols-3 gap-3" role="radiogroup" aria-label="Pilih prioritas">
+                <button 
+                  type="button"
+                  class="priority-btn low glass rounded-xl py-3 text-sm font-semibold transition-all"
+                  data-priority="low"
+                  role="radio"
+                  aria-checked="false">
+                  Rendah
+                </button>
+                <button 
+                  type="button"
+                  class="priority-btn medium active glass rounded-xl py-3 text-sm font-semibold transition-all"
+                  data-priority="medium"
+                  role="radio"
+                  aria-checked="true">
+                  Sedang
+                </button>
+                <button 
+                  type="button"
+                  class="priority-btn high glass rounded-xl py-3 text-sm font-semibold transition-all"
+                  data-priority="high"
+                  role="radio"
+                  aria-checked="false">
+                  Tinggi
+                </button>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+              type="submit"
+              class="w-full btn btn-primary text-white py-4 rounded-xl shadow-lg hover:shadow-xl">
+              <span class="flex items-center justify-center gap-2">
+                <i class="fas fa-plus"></i>
+                <span class="font-semibold">Tambahkan Tugas</span>
+              </span>
+            </button>
+          </form>
+
+          <!-- Motivation Box -->
+          <div class="mt-6 p-4 glass rounded-xl">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400 text-lg"></i>
+              </div>
+              <div class="flex-1">
+                <div class="text-sm font-semibold text-gray-900 dark:text-white mb-1">Motivasi Hari Ini</div>
+                <p id="motivationText" class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <div class="lg:col-span-2">
+        <div class="glass rounded-3xl p-6 glass-hover min-h-96">
+          <!-- Controls -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+            <h2 class="text-xl font-bold flex items-center gap-2 text-gray-900 dark:text-white">
+              <i class="fas fa-list-check text-secondary"></i>
+              Tugas Hari Ini
+              <span id="taskCount" class="text-sm font-normal text-gray-500 dark:text-gray-400">(0)</span>
+            </h2>
+
+            <div class="flex gap-3">
+              <select 
+                id="filterBy"
+                class="px-4 py-2 glass rounded-lg text-sm focus:outline-none text-gray-900 dark:text-white font-medium"
+                aria-label="Filter tugas">
+                <option value="all">Semua</option>
+                <option value="active">Aktif</option>
+                <option value="completed">Selesai</option>
+                <option value="high">Prioritas Tinggi</option>
+                <option value="medium">Prioritas Sedang</option>
+                <option value="low">Prioritas Rendah</option>
+              </select>
+
+              <select 
+                id="sortBy"
+                class="px-4 py-2 glass rounded-lg text-sm focus:outline-none text-gray-900 dark:text-white font-medium"
+                aria-label="Urutkan tugas">
+                <option value="created">Terbaru</option>
+                <option value="time">Waktu</option>
+                <option value="priority">Prioritas</option>
+                <option value="name">Nama</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Task List -->
+          <div id="taskList" class="space-y-3" role="list" aria-label="Daftar tugas"></div>
+
+          <!-- Empty State -->
+          <div id="emptyState" class="hidden text-center py-16">
+            <div class="w-32 h-32 mx-auto mb-6 glass rounded-3xl flex items-center justify-center">
+              <i class="fas fa-clipboard-list text-6xl text-gray-300 dark:text-gray-600"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Belum Ada Tugas</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-sm mx-auto">
+              Mulai hari produktif dengan menambahkan tugas pertamamu!
+            </p>
+            <button 
+              onclick="document.getElementById('taskName').focus()"
+              class="btn btn-primary text-white px-6 py-3 rounded-xl font-semibold shadow-lg">
+              <span class="flex items-center gap-2">
+                <i class="fas fa-plus"></i>
+                Tambah Tugas Pertama
+              </span>
+            </button>
+          </div>
+
+          <!-- Loading Skeleton -->
+          <div id="loadingSkeleton" class="space-y-3 hidden" aria-hidden="true">
+            <div class="skeleton h-24"></div>
+            <div class="skeleton h-24"></div>
+            <div class="skeleton h-24"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Achievements Modal -->
+    <div 
+      id="achievementsModal"
+      class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-center justify-center z-50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="achievementsTitle">
+      <div class="glass rounded-3xl p-6 w-full max-w-3xl max-h-[85vh] overflow-y-auto">
+        <div class="flex items-center justify-between mb-6">
+          <h2 id="achievementsTitle" class="text-2xl font-bold flex items-center gap-3 text-gray-900 dark:text-white">
+            <i class="fas fa-trophy text-yellow-500"></i>
+            Pencapaian
+          </h2>
+          <button 
+            id="closeAchievements"
+            class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:scale-110 transition-all focus-visible"
+            aria-label="Tutup">
+            <i class="fas fa-times text-gray-700 dark:text-gray-300"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="achievementsList" role="list"></div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div 
+      id="editModal" 
+      class="fixed inset-0 bg-black/60 backdrop-blur-md hidden items-center justify-center z-50 p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="editTitle">
+      <div class="glass rounded-3xl p-6 w-full max-w-md">
+        <h3 id="editTitle" class="text-xl font-bold mb-5 text-gray-900 dark:text-white">Edit Tugas</h3>
+        <form id="editForm" class="space-y-4">
+          <input type="hidden" id="editId" />
+          
+          <div>
+            <label for="editName" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Nama</label>
+            <input 
+              id="editName" 
+              type="text" 
+              required
+              class="w-full px-4 py-3 glass rounded-xl focus:outline-none input-field text-gray-900 dark:text-white" />
+          </div>
+          
+          <div>
+            <label for="editTime" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Waktu</label>
+            <input 
+              id="editTime" 
+              type="time"
+              class="w-full px-4 py-3 glass rounded-xl focus:outline-none input-field text-gray-900 dark:text-white" />
+          </div>
+          
+          <div>
+            <label for="editPriority" class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Prioritas</label>
+            <select 
+              id="editPriority"
+              class="w-full px-4 py-3 glass rounded-xl focus:outline-none text-gray-900 dark:text-white">
+              <option value="low">Rendah</option>
+              <option value="medium">Sedang</option>
+              <option value="high">Tinggi</option>
+            </select>
+          </div>
+          
+          <div class="flex gap-3 pt-2">
+            <button type="submit" class="flex-1 btn btn-primary text-white py-3 rounded-xl font-semibold">
+              Simpan Perubahan
+            </button>
+            <button 
+              type="button" 
+              id="cancelEdit" 
+              class="flex-1 btn btn-secondary py-3 rounded-xl font-semibold text-gray-700 dark:text-gray-300">
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <div class="max-w-md mx-auto flex items-center justify-around py-3 px-2">
+        <button 
+          class="nav-btn active flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all"
+          onclick="window.scrollTo({top:0,behavior:'smooth'})"
+          aria-label="Home"
+          aria-current="page">
+          <i class="fas fa-home text-xl"></i>
+          <span class="text-xs font-medium">Home</span>
+        </button>
+        
+        <button 
+          class="nav-btn flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all"
+          onclick="document.getElementById('taskName').focus()"
+          aria-label="Tambah tugas">
+          <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
+            <i class="fas fa-plus text-white"></i>
+          </div>
+        </button>
+        
+        <button 
+          id="achievementsBtnMobile" 
+          class="nav-btn flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all"
+          aria-label="Pencapaian">
+          <i class="fas fa-trophy text-xl"></i>
+          <span class="text-xs font-medium">Reward</span>
+        </button>
+        
+        <button 
+          id="themeToggleMobile" 
+          class="nav-btn flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition-all"
+          aria-label="Ganti tema">
+          <i class="fas fa-moon text-xl"></i>
+          <span class="text-xs font-medium">Tema</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Toast Container -->
+    <div 
+      id="toastContainer" 
+      class="fixed top-4 right-4 z-50 space-y-2" 
+      role="status" 
+      aria-live="polite" 
+      aria-atomic="true"></div>
+  </div>
+
+  <script src="script.js">
+  </script>
+</body>
+</html>
