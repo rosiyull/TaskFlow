@@ -1,184 +1,189 @@
-TaskFlow - Smart Daily Planner
-📋 Latar Belakang / Background
-Masalah yang Diselesaikan
-TaskFlow dikembangkan untuk mengatasi tantangan umum dalam manajemen waktu dan produktivitas sehari-hari. Banyak orang mengalami:
+# TaskFlow — Smart Daily Planner 🚀
 
-Kesulitan dalam merencanakan dan melacak tugas harian
+**TaskFlow** adalah aplikasi web daily planner yang menggabungkan manajemen tugas dengan gamifikasi untuk membantu pengguna menjadi lebih konsisten, fokus, dan termotivasi.
 
-Kurangnya motivasi untuk menyelesaikan tugas
+---
 
-Tidak adanya sistem reward untuk pencapaian konsistensi
+## Daftar Isi
 
-Interface yang membosankan pada aplikasi to-do list konvensional
+1. [Latar Belakang](#latar-belakang)
+2. [Motivasi & Tujuan](#motivasi--tujuan)
+3. [Manfaat Utama](#manfaat-utama)
+4. [Fitur Unggulan](#fitur-unggulan)
+5. [Cara Menggunakan](#cara-menggunakan)
 
-Konteks Pengembangan
-Aplikasi ini dibuat sebagai solusi modern yang menggabungkan konsep gamifikasi dengan manajemen tugas untuk menciptakan pengalaman yang lebih engaging dan memotivasi. Dengan pendekatan glassmorphism design dan sistem pencapaian, TaskFlow bertransformasi dari sekadar to-do list biasa menjadi companion produktivitas yang menyenangkan.
+   * Instalasi & Menjalankan Aplikasi
+   * Cara Menggunakan Fitur Utama
+6. [Tips & Best Practices](#tips--best-practices)
+7. [Contoh Workflow Harian](#contoh-workflow-harian)
+8. [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+9. [Lisensi & Kontak](#lisensi--kontak)
 
-Motivasi dan Tujuan
-Motivasi: Menciptakan aplikasi yang tidak hanya fungsional tetapi juga memberikan kepuasan visual dan psikologis
+---
 
-Tujuan: Meningkatkan konsistensi pengguna dalam menyelesaikan tugas melalui sistem streak dan achievements
+## Latar Belakang
 
-Visi: Menjadi daily companion yang membantu user mencapai goals dengan cara yang lebih terstruktur dan menyenangkan
+**Masalah yang diselesaikan:**
 
-✨ Manfaat / Benefits
-Keuntungan Utama
-📊 Visual Progress Tracking: Melihat progress harian secara real-time dengan visual yang menarik
+* Sulit merencanakan dan melacak tugas harian.
+* Kurangnya motivasi untuk menyelesaikan tugas.
+* Tidak adanya sistem reward untuk mempertahankan konsistensi.
+* Antarmuka to-do list konvensional terasa membosankan.
 
-🎯 Priority Management: Mengatur tugas berdasarkan tingkat kepentingan
+**Konteks pengembangan:**
+TaskFlow dirancang sebagai solusi modern yang memadukan gamifikasi dan manajemen tugas dengan estetika glassmorphism, animasi halus, dan sistem pencapaian untuk menciptakan pengalaman yang engaging.
 
-🔥 Streak Motivation: Sistem streak yang mendorong konsistensi
+## Motivasi & Tujuan
 
-🏆 Achievement System: Gamifikasi yang membuat produktivitas lebih menyenangkan
+**Motivasi:** Membuat aplikasi yang fungsional sekaligus memberikan kepuasan visual dan psikologis.
 
-🌙 Dark/Light Mode: Pengalaman visual yang nyaman di segala kondisi pencahayaan
+**Tujuan:** Meningkatkan konsistensi pengguna dalam menyelesaikan tugas melalui fitur streak dan achievement.
 
-📱 Responsive Design: Dapat diakses dari desktop maupun mobile
+**Visi:** Menjadi daily companion yang membantu pengguna mencapai tujuan secara terstruktur dan menyenangkan.
 
-Fitur Unggulan
-Smart Task Management
+## Manfaat Utama
 
-Tambah, edit, hapus tugas dengan mudah
+* **Visual Progress Tracking:** Monitor progres harian secara real-time dengan visual menarik.
+* **Priority Management:** Atur tugas berdasarkan prioritas (Rendah / Sedang / Tinggi).
+* **Streak Motivation:** Sistem streak untuk mendorong kebiasaan harian.
+* **Achievement System:** Gamifikasi dengan unlockable achievements & confetti celebration.
+* **Dark/Light Mode:** Nyaman digunakan di kondisi pencahayaan berbeda.
+* **Responsive Design:** Bisa diakses di desktop maupun mobile.
 
-Setel waktu dan prioritas untuk setiap tugas
+## Fitur Unggulan
 
-Filter dan sortir tugas berdasarkan berbagai kriteria
+**Smart Task Management**
 
-Progress Visualization
+* Tambah, edit, hapus tugas dengan mudah.
+* Setel waktu dan prioritas untuk setiap tugas.
+* Filter & sortir tugas berdasarkan berbagai kriteria.
 
-Progress ring dengan animasi smooth
+**Progress Visualization**
 
-Statistik harian yang informatif
+* Progress ring dengan animasi smooth.
+* Statistik harian yang informatif.
+* Visual feedback memuaskan saat tugas selesai.
 
-Visual feedback yang memuaskan
+**Motivational Elements**
 
-Motivational Elements
+* Quote motivasi harian.
+* Achievement unlocks dengan efek confetti.
+* Streak counter yang memantau konsistensi.
 
-Quotes motivasi harian
+**User Experience**
 
-Achievement unlocks dengan efek confetti
+* Glassmorphism design modern.
+* Transisi & animasi halus.
+* Keyboard shortcuts untuk power users.
 
-Streak counter untuk konsistensi
+## Cara Menggunakan
 
-User Experience
+### Instalasi & Menjalankan Aplikasi
 
-Glassmorphism design yang modern
+Aplikasi ini berjalan langsung di browser — tanpa instalasi server tambahan.
 
-Transisi dan animasi yang halus
+1. **Download file**
 
-Keyboard shortcuts untuk power users
+   * `index.html`
+   * `style.css`
+   * `script.js`
 
-Value untuk Pengguna
-⏰ Efisiensi Waktu: Mengurangi waktu untuk merencanakan dan melacak tugas
+2. **Simpan** ketiga file tersebut ke dalam satu folder.
 
-📈 Peningkatan Produktivitas: Sistem yang mendorong penyelesaian tugas lebih konsisten
-
-😊 Kepuasan Psikologis: Reward system yang memberikan sense of accomplishment
-
-🎨 Pengalaman Visual: Interface yang pleasing dan tidak membosankan
-
-🚀 Cara Menggunakan / How to Use
-Instalasi dan Menjalankan Aplikasi
-TaskFlow adalah aplikasi web yang berjalan langsung di browser tanpa memerlukan instalasi kompleks:
-
-Download Files
-
-bash
-# Download ketiga file berikut:
-- index.html
-- style.css
-- script.js
-Simpan dalam Folder yang Sama
-
-Pastikan ketiga file berada dalam folder yang sama
-
-Struktur folder:
-
+```
 taskflow-folder/
 ├── index.html
 ├── style.css
 └── script.js
-Jalankan Aplikasi
+```
 
-Buka file index.html di browser web favorit Anda
+3. **Jalankan**
 
-Aplikasi akan langsung berjalan tanpa perlu setup tambahan
+   * Buka `index.html` menggunakan browser favorit (Chrome, Firefox, Edge, Safari).
+   * Aplikasi akan langsung berjalan dan menyimpan data ke Local Storage.
 
-Cara Menggunakan Fitur Utama
-1. Menambahkan Tugas Baru
-Contoh Input:
-- Nama Kegiatan: "Meeting dengan tim marketing"
-- Waktu: "14:30"
-- Prioritas: "Tinggi"
+### Cara Menggunakan — Fitur Utama
 
-Output:
-- Tugas muncul di daftar dengan badge prioritas merah
-- Statistik "Pending" bertambah +1
-Langkah-langkah:
+#### 1. Menambahkan Tugas Baru
 
-Isi field "Nama Kegiatan"
+**Contoh Input:**
 
-Pilih waktu (opsional)
+* **Nama Kegiatan:** `Meeting dengan tim marketing`
+* **Waktu:** `14:30` (opsional)
+* **Prioritas:** `Tinggi`
 
-Tentukan prioritas (Rendah, Sedang, Tinggi)
+**Langkah:**
 
-Klik "Tambahkan Tugas"
+1. Isi field *Nama Kegiatan*.
+2. Pilih waktu (opsional).
+3. Tentukan prioritas (Rendah / Sedang / Tinggi).
+4. Klik **Tambah Tugas**.
 
-2. Mengelola Tugas yang Ada
-Contoh Aksi:
-- Klik checkbox untuk menandai tugas selesai
-- Klik ikon edit (pensil) untuk mengubah detail tugas
-- Klik ikon hapus (tong sampah) untuk menghapus tugas
+**Output:** tugas muncul di daftar dengan badge prioritas, statistik "Pending" bertambah.
 
-Output:
-- Tugas selesai: garis coret, statistik "Selesai" +1
-- Progress ring animasi bertambah
-3. Filter dan Sortir
-Filter: Semua, Aktif, Selesai, atau berdasarkan prioritas
+#### 2. Mengelola Tugas yang Ada
 
-Sortir: Terbaru, Waktu, Prioritas, atau Nama
+* Centang checkbox untuk menandai tugas selesai (akan menambah statistik "Selesai" dan memperbarui progress ring).
+* Klik ikon edit untuk mengubah detail tugas.
+* Klik ikon hapus untuk menghapus tugas.
 
-4. Melihat Pencapaian
-Klik ikon trophy di header atau navigasi mobile
-Lihat achievement yang sudah dan belum terkunci
-Setiap achievement unlock akan trigger confetti celebration
-Tips Penggunaan Efektif
-Shortcut Keyboard
-Ctrl + K / Cmd + K: Focus ke input task name
-Escape: Tutup modal yang terbuka
+#### 3. Filter & Sortir
 
-Best Practices
-Gunakan Prioritas dengan Bijak
+* **Filter:** Semua / Aktif / Selesai / Berdasarkan Prioritas.
+* **Sortir:** Terbaru / Waktu / Prioritas / Nama.
 
-Tinggi: Tugas urgent dan penting
-Sedang: Tugas penting tapi tidak urgent
-Rendah: Tugas opsional atau backlog
-Manfaatkan Waktu
-Setel waktu untuk tugas time-sensitive
-Sistem akan menandai tugas yang overdue
-Jaga Streak
-Selesaikan minimal 1 tugas setiap hari
-Streak akan reset jika melewatkan sehari
+#### 4. Melihat Pencapaian
 
-Contoh Workflow Harian
-Morning Routine:
+* Klik ikon trophy di header atau navigasi mobile.
+* Lihat achievement yang sudah/ belum terkunci.
+* Setiap unlock akan memicu confetti celebration.
 
-08:00 - [Tinggi] Review daily goals
-08:30 - [Sedang] Check dan reply email
-10:00 - [Tinggi] Kerjakan project utama
-Afternoon Session:
+## Tips & Best Practices
 
-13:00 - [Sedang] Meeting tim
-15:00 - [Rendah] Organize documents
-16:30 - [Tinggi] Finalize laporan
+**Shortcut Keyboard**
 
-🛠️ Teknologi yang Digunakan
-Frontend: HTML5, CSS3, JavaScript (ES6+)
-Styling: Tailwind CSS + Custom Glassmorphism
-Icons: Font Awesome 6
-Storage: Local Storage API
-Effects: Canvas Confetti
-Font: Inter (Google Fonts)
-TaskFlow - Your Smart Daily Companion 🚀
+* `Ctrl + K` / `Cmd + K`: Fokus ke input nama tugas.
+* `Escape`: Tutup modal yang terbuka.
 
-"Transform your productivity with beautiful design and smart features"
+**Best Practices**
+
+* Gunakan prioritas dengan bijak:
+
+  * **Tinggi:** Urgent & penting.
+  * **Sedang:** Penting tapi tidak urgent.
+  * **Rendah:** Opsional / backlog.
+* Setel waktu untuk tugas yang time-sensitive agar tidak terlewat (akan ditandai sebagai overdue jika lewat).
+* Jaga streak: usahakan menyelesaikan minimal 1 tugas setiap hari untuk mempertahankan streak.
+
+## Contoh Workflow Harian
+
+**Morning Routine**
+
+* `08:00` — [Tinggi] Review daily goals
+* `08:30` — [Sedang] Check & reply email
+* `10:00` — [Tinggi] Kerjakan project utama
+
+**Afternoon Session**
+
+* `13:00` — [Sedang] Meeting tim
+* `15:00` — [Rendah] Organize documents
+* `16:30` — [Tinggi] Finalize laporan
+
+## Teknologi yang Digunakan
+
+* **Frontend:** HTML5, CSS3, JavaScript (ES6+)
+* **Styling:** Tailwind CSS + custom glassmorphism
+* **Icons:** Font Awesome 6
+* **Storage:** Local Storage API
+* **Effects:** Canvas Confetti
+* **Font:** Inter (Google Fonts)
+
+## Lisensi & Kontak
+
+* **Lisensi:** (Tambahkan lisensi proyek Anda di sini — mis. MIT)
+* **Kontak & Kontribusi:** Untuk kontribusi, ide fitur, atau laporan bug, silakan buka issue atau kirim PR pada repository proyek.
+
+---
+
+**TaskFlow — Your Smart Daily Companion**
+Transform your productivity with beautiful design and smart features.
